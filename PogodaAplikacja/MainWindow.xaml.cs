@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Text.Json.Serialization;
 
 namespace PogodaAplikacja
 {
@@ -32,13 +33,18 @@ namespace PogodaAplikacja
         {
             time.Text = DateTime.Now.ToString("HH:mm:ss");
             tokyoTime.Text = DateTime.Now.AddHours(8).ToString("HH:mm:ss");
-            date.Text = DateTime.Now.ToString("dd.mm.yyyy");
+            date.Text = DateTime.Now.ToString("dd.M.yyyy");
         }
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
             _timer.Stop();
+
+        }
+
+        private void DaneWarszawa(object sender, RoutedEventArgs e)
+        {
 
         }
     }
