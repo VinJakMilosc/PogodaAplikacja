@@ -26,11 +26,11 @@
         </StackPanel>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="GG:MM:SS" HorizontalAlignment="Center" x:Name="tokyoTime" Margin="15,95,0,0" Foreground="PeachPuff" Height="800" Width="284" FontSize="60" FontStyle="Italic"/>
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="0, 40,0,0">
-            <TextBlock Text="Pogoda:" HorizontalAlignment="Center"/>
-            <Button Content="Warszawa" Margin="15,10,10,10" Click="DaneWarszawa"/>
-            <TextBlock Text="Pogoda:" HorizontalAlignment="Center"/>
-            <Button Content="Tokio" Margin="15,10,15,10"/>
+            <Button Click="Pogoda_Click" Margin="15,10,10,10" x:Name="PogodaWarszawa" Content="Warszawa"/>
+            <Button Click="Pogoda_Click" Margin="15,10,10,10" x:Name="PogodaGdansk" Content="Gdańsk"/>
+            <TextBlock x:Name="PogodaText" Text="Pogoda:" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="StatusPobierania" Text="Info:" HorizontalAlignment="Center"/>
         </StackPanel>
-
+       
     </Grid>
 </Window>

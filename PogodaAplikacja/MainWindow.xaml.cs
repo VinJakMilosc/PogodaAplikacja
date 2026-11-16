@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Net.Http;
+using System.Text;
+using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,17 +11,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Text.Json.Serialization;
+using System.Windows.Controls;
 
 namespace PogodaAplikacja
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
     public partial class MainWindow : Window
     {
 
         private DispatcherTimer _timer;
+
+        private readonly HttpClient _httpClient = new HttpClient();
+
+        private readonly string WarszawaUrl = "https://api.open-meteo.com/v1/forecast?latitude=52.2298&longitude=21.0118&current=temperature_2m,relative_humidity_2m";
+
+        private readonly string GdanskUrl = "https://api.open-meteo.com/v1/forecast?latitude=54.3523&longitude=18.6491&current=temperature_2m,relative_humidity_2m";
         public MainWindow()
         {
             InitializeComponent();
@@ -43,9 +53,26 @@ namespace PogodaAplikacja
 
         }
 
-        private void DaneWarszawa(object sender, RoutedEventArgs e)
+        private async void Pogoda_Click(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            if (clickedButton == PogodaWarszawa)
+            {
+                await LoadWeatherAsync(WarszawaUrl, clickedButton, 0);
+            }
+            else if (clickedButton == PogodaGdansk)
+            {
+                await LoadWeatherAsync(GdanskUrl, clickedButton, 0);
+            }
+        }
+
+        private async Task LoadWeatherAsync(string url, Button clickedButton, int i)
         {
 
+            StatusPobierania.Text = "Pobieranie danych...";
+            clickedButton.IsEnabled = false;
+            string json = await _httpClient.GetStringAsync(url);
         }
     }
+    
   }
